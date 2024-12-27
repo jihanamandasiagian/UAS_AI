@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Disease Prediction</title>
+    <style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(135deg, #6a11cb, #2575fc);
+        color: #2c3e50;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+    }
+    
+    label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: #34495e;
+    }
+    
+    form {
+        background: #ffffff;
+        padding: 30px 40px;
+        border-radius: 12px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        max-width: 550px;
+        width: 100%;
+    }
+
+    
+
+    
+    input[type="text"] {
+        width: 100%;
+        padding: 12px 15px;
+        margin-bottom: 15px;
+        border: 1px solid #dcdde1;
+        border-radius: 8px;
+        box-sizing: border-box;
+        font-size: 14px;
+        transition: all 0.3s ease;
+    }
+    
+    input[type="text"]:focus {
+        border-color: #6a11cb;
+        box-shadow: 0 0 6px rgba(106, 17, 203, 0.2);
+        outline: none;
+    }
+    
+    input[type="radio"] {
+        margin-right: 10px;
+        transform: scale(1.2);
+        cursor: pointer;
+    }
+    
+    button {
+        background: linear-gradient(135deg, #6a11cb, #2575fc);
+        color: white;
+        padding: 14px;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        width: 100%;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+    
+    button:hover {
+        background: linear-gradient(135deg, #5b0ecb, #1f63fc);
+        box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);
+    }
+    
+    button:active {
+        transform: scale(0.98);
+    }
+    
+    p {
+        font-size: 18px;
+        text-align: center;
+        color: #2c3e50;
+    }
+    
+    a {
+        display: block;
+        text-align: center;
+        margin-top: 20px;
+        text-decoration: none;
+        color: #2575fc;
+        font-weight: bold;
+        transition: color 0.3s ease;
+    }
+    
+    a:hover {
+        color: #6a11cb;
+    }
+    h1 {
+        text-align: center;
+        color: #6a11cb;
+        margin-bottom: 30px;
+        font-size: 2.5rem;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+    </style>    
+</head>
+<body>
+    
+
+    <form action="/predict" method="POST">
+        <h1>Heart Disease Prediction</h1>
+        <label for="age">Age:</label>
+        <input type="text" id="age" name="age" required><br><br>
+
+        <label for="trestbps">Resting Blood Pressure (trestbps):</label>
+        <input type="text" id="trestbps" name="trestbps" required><br><br>
+
+        <label for="chol">Cholesterol (chol):</label>
+        <input type="text" id="chol" name="chol" required><br><br>
+
+        <label for="oldpeak">Oldpeak:</label>
+        <input type="text" id="oldpeak" name="oldpeak" required><br><br>
+
+        <label for="ca">Number of Major Vessels (ca):</label>
+        <input type="text" id="ca" name="ca" required><br><br>
+
+        <label for="thalch">Maximum Heart Rate (thalch):</label>
+        <input type="text" id="thalch" name="thalch" required><br><br>
+
+        <label for="thalch">chest pain type (cpt):</label>
+        <input type="radio" id="cp_asymptomatic" name="cp_asymptomatic" value="1">
+        <label for="cp_asymptomatic">Asymptomatic</label><br>
+        <input type="radio" id="cp_atypical_angina" name="cp_atypical_angina" value="1">
+        <label for="cp_atypical_angina">Atypical Angina</label><br>
+        <input type="radio" id="cp_non_anginal" name="cp_non_anginal" value="1">
+        <label for="cp_non_anginal">Non-Anginal Pain</label><br>
+        <input type="radio" id="cp_typical_angina" name="cp_typical_angina" value="1">
+        <label for="cp_typical_angina">Typical Angina</label><br><br><br>
+        
+        <label>Resting Electrocardiographic Results (restecg):</label>
+        <input type="radio" id="restecg_lv_hypertrophy" name="restecg" value="1">
+        <label for="restecg_lv_hypertrophy">Left Ventricular Hypertrophy</label><br>
+        <input type="radio" id="restecg_normal" name="restecg" value="1">
+        <label for="restecg_normal">Normal</label><br>
+        <input type="radio" id="restecg_st_t_abnormality" name="restecg" value="1">
+        <label for="restecg_st_t_abnormality">ST-T Wave Abnormality</label><br><br><br><br>
+
+        <label>Sex:</label>
+        <input type="radio" id="sex_Female" name="sex" value="1">
+        <label for="sex_Female">Female</label><br>
+        <input type="radio" id="sex_Male" name="sex" value="1">
+        <label for="sex_Male">Male</label><br><br>
+
+        <label>Exercise Induced Angina (exang):</label>
+        <input type="radio" id="exang_False" name="exang" value="1">
+        <label for="exang_False">No</label><br>
+        <input type="radio" id="exang_True" name="exang" value="1">
+        <label for="exang_True">Yes</label><br><br>
+
+        <label>Fasting Blood Sugar > 120 mg/dl (fbs):</label>
+        <input type="radio" id="fbs_False" name="fbs" value="1">
+        <label for="fbs_False">No</label><br>
+        <input type="radio" id="fbs_True" name="fbs" value="1">
+        <label for="fbs_True">Yes</label><br><br>
+
+        <button type="submit">Predict</button>
+    </form>
+</body>
+</html>
